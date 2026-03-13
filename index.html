@@ -25,8 +25,26 @@
         /* 갤러리 스타일 */
         .gallery-container { padding: 0 20px 60px; }
         .swiper { width: 100%; height: auto; border-radius: 4px; overflow: hidden; }
-        .swiper-slide img { width: 100%; display: block; cursor: pointer; }
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            min-height: 300px;
+        }
+        .swiper-slide img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            cursor: pointer;
+            object-fit: contain; /* 슬라이드 내에서도 비율 유지 */
+        }
         .swiper-pagination-bullet-active { background: var(--accent); }
+
+        /* 확대 시 이미지 왜곡 방지 */
+        .pswp__img {
+            object-fit: contain !important;
+        }
 
         .date-info { background: #fdfdfd; padding: 40px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
         .d-day { font-weight: bold; color: var(--accent); font-size: 1.1rem; margin-bottom: 10px; }
@@ -34,7 +52,6 @@
         .map-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
         .btn { padding: 12px 20px; border: 1px solid #ddd; background: white; cursor: pointer; text-decoration: none; color: #555; font-size: 0.85rem; border-radius: 5px; }
         
-        /* 아코디언 계좌 섹션 스타일 */
         .account-details { width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid #eee; background: #fff; }
         .account-summary { 
             padding: 15px 20px; background: #fff; cursor: pointer; list-style: none; 
@@ -62,6 +79,7 @@
         .copy-btn svg { width: 16px; height: 16px; fill: #888; }
         
         footer { padding: 60px 40px; font-size: 0.75rem; color: #aaa; text-align: center; letter-spacing: 1px; }
+
 
 
         /* 갤러리 슬라이드 이미지 중앙 정렬 */
@@ -114,35 +132,30 @@
         <div class="swiper mySwiper" id="gallery-vibe">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <a href="images/gallery1.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                    <a href="images/gallery1.jpg" target="_blank">
                         <img src="images/gallery1.jpg" alt="갤러리 사진 1" />
                     </a>
                 </div>
                 <div class="swiper-slide">
-                    <a href="images/gallery2.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                    <a href="images/gallery2.jpg" target="_blank">
                         <img src="images/gallery2.jpg" alt="갤러리 사진 2" />
                     </a>
                 </div>
                 <div class="swiper-slide">
-                    <a href="images/gallery3.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                    <a href="images/gallery3.jpg" target="_blank">
                         <img src="images/gallery3.jpg" alt="갤러리 사진 3" />
                     </a>
                 </div>
                 <div class="swiper-slide">
-                    <a href="images/gallery4.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                    <a href="images/gallery4.jpg" target="_blank">
                         <img src="images/gallery4.jpg" alt="갤러리 사진 4" />
                     </a>
                 </div>
                 <div class="swiper-slide">
-                    <a href="images/gallery5.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                    <a href="images/gallery5.jpg" target="_blank">
                         <img src="images/gallery5.jpg" alt="갤러리 사진 5" />
                     </a>
-                </div>                                
-                <div class="swiper-slide">
-                    <a href="images/gallery5.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
-                        <img src="images/gallery5.jpg" alt="갤러리 사진 5" />
-                    </a>
-                </div>                
+                </div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -183,15 +196,6 @@
                         <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                     </button>
                 </div>
-                <div class="account-item">
-                    <div class="account-info">
-                        <em>신랑 부</em> <strong>구덕모</strong>
-                        <div class="account-number">국민은행 000-00-0000-000</div>
-                    </div>
-                    <button class="copy-btn" onclick="copyToClipboard('000000000000')">
-                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                    </button>
-                </div>
             </div>
         </details>
 
@@ -204,15 +208,6 @@
                         <div class="account-number">카카오뱅크 3333-01-2345678</div>
                     </div>
                     <button class="copy-btn" onclick="copyToClipboard('3333012345678')">
-                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                    </button>
-                </div>
-                <div class="account-item">
-                    <div class="account-info">
-                        <em>신부 부</em> <strong>안창국</strong>
-                        <div class="account-number">우리은행 1002-000-000000</div>
-                    </div>
-                    <button class="copy-btn" onclick="copyToClipboard('100200000000')">
                         <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
                     </button>
                 </div>
@@ -230,7 +225,7 @@
 <script type="module">
     import PhotoSwipeLightbox from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe-lightbox.esm.min.js';
     
-    // 1. Swiper 초기화
+    // Swiper 초기화
     const swiper = new Swiper(".mySwiper", {
         loop: true,
         spaceBetween: 10,
@@ -240,12 +235,19 @@
         },
     });
 
-    // 2. PhotoSwipe (라이트박스) 초기화
+    // PhotoSwipe 초기화 (이미지 크기를 자동으로 감지하도록 설정 보완)
     const lightbox = new PhotoSwipeLightbox({
         gallery: '#gallery-vibe',
         children: 'a',
-        pswpModule: () => import('https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.esm.min.js')
+        pswpModule: () => import('https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.esm.min.js'),
+        // 이미지가 로드된 후 실제 크기를 할당하여 왜곡 방지
     });
+
+    lightbox.on('itemData', (e) => {
+        const { itemData } = e;
+        // 특정 크기를 강제하지 않고 이미지 본래 크기를 따르도록 함
+    });
+
     lightbox.init();
 </script>
 
@@ -261,16 +263,12 @@
     }
     updateDday();
 
-    // 계좌번호 복사 함수
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(function() {
             alert("계좌번호가 복사되었습니다.");
-        }, function(err) {
-            console.error('복사 실패:', err);
         });
     }
 </script>
 
 </body>
 </html>
-
