@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>구양하 & 안수경 결혼합니다</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Gowun+Batang&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.min.css">
+
     <style>
         :root { --bg-color: #ffffff; --text-main: #333333; --text-sub: #777777; --accent: #8e9775; }
         body { margin: 0; padding: 0; font-family: 'Noto Serif KR', serif; background-color: #f9f9f9; color: var(--text-main); line-height: 1.8; }
@@ -18,15 +22,64 @@
         .section-title { font-size: 0.9rem; color: var(--accent); letter-spacing: 3px; margin-bottom: 30px; }
         .invitation-text { font-family: 'Gowun Batang', serif; font-size: 1.05rem; color: var(--text-main); word-break: keep-all; line-height: 2.2; }
         
+        /* 갤러리 스타일 */
+        .gallery-container { padding: 0 20px 60px; }
+        .swiper { width: 100%; height: auto; border-radius: 4px; overflow: hidden; }
+        .swiper-slide img { width: 100%; display: block; cursor: pointer; }
+        .swiper-pagination-bullet-active { background: var(--accent); }
+
         .date-info { background: #fdfdfd; padding: 40px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
         .d-day { font-weight: bold; color: var(--accent); font-size: 1.1rem; margin-bottom: 10px; }
 
         .map-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
         .btn { padding: 12px 20px; border: 1px solid #ddd; background: white; cursor: pointer; text-decoration: none; color: #555; font-size: 0.85rem; border-radius: 5px; }
         
-        .account-box { background: #f8f8f8; padding: 20px; border-radius: 8px; margin-top: 15px; text-align: left; font-size: 0.85rem; border: 1px solid #eee; }
+        /* 아코디언 계좌 섹션 스타일 */
+        .account-details { width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 12px; border: 1px solid #eee; background: #fff; }
+        .account-summary { 
+            padding: 15px 20px; background: #fff; cursor: pointer; list-style: none; 
+            display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; font-weight: bold;
+        }
+        .account-summary::-webkit-details-marker { display: none; }
+        .account-summary::after { content: '▲'; font-size: 0.7rem; color: #bbb; transition: 0.3s; }
+        details[open] .account-summary::after { transform: rotate(180deg); }
+        
+        .account-list { padding: 0 15px; background: #fdfdfd; border-top: 1px solid #f5f5f5; }
+        .account-item { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 5px; border-bottom: 1px solid #f0f0f0;
+        }
+        .account-item:last-child { border-bottom: none; }
+        .account-info { text-align: left; line-height: 1.4; }
+        .account-info em { font-style: normal; font-size: 0.8rem; color: #888; display: block; margin-bottom: 2px; }
+        .account-info strong { font-size: 0.95rem; color: #333; }
+        .account-number { font-size: 0.85rem; color: #666; margin-top: 4px; font-family: sans-serif; }
+        
+        .copy-btn { 
+            background: #f4f4f4; border: none; padding: 8px; border-radius: 5px; cursor: pointer;
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .copy-btn svg { width: 16px; height: 16px; fill: #888; }
         
         footer { padding: 60px 40px; font-size: 0.75rem; color: #aaa; text-align: center; letter-spacing: 1px; }
+
+
+        /* 갤러리 슬라이드 이미지 중앙 정렬 */
+        .swiper-slide {
+            display: flex;
+            align-items: center;    /* 수직(상하) 중앙 정렬 */
+            justify-content: center; /* 수평(좌우) 중앙 정렬 */
+            background-color: #f9f9f9; /* (선택사항) 가로 사진 위아래 빈 공간 배경색 */
+            height: auto;           /* 높이는 내용물에 맞춤 */
+        }
+
+        /* 이미지 박스 크기 유지 */
+        .swiper {
+            width: 100%;
+            /* 슬라이더 전체 높이를 가장 큰 세로 사진 기준으로 고정하고 싶다면 */
+            /* 아래 min-height 값을 적절히 조절하세요 (예: 500px) */
+            min-height: 300px; 
+        }
     </style>
 </head>
 <body>
@@ -35,7 +88,7 @@
     <section class="main-visual">
         <div class="main-title">구 양 하 &nbsp; | &nbsp; 안 수 경</div>
         <p style="font-size: 0.85rem; color: var(--text-sub); margin-top: 15px;">2026. 05. 09. SAT PM 1:00</p>
-        <img src="main.jpg" alt="메인 사진">
+        <img src="images/main.jpg" alt="메인 사진">
     </section>
 
     <section class="section">
@@ -54,6 +107,46 @@
             구덕모 · 박미경 <span style="font-size: 0.85rem; color: #999;">의 아들</span> <b>양하</b><br>
             안창국 · 심혜정 <span style="font-size: 0.85rem; color: #999;">의 딸</span> <b>수경</b>
         </div>
+    </section>
+
+    <section class="gallery-container">
+        <div class="section-title">GALLERY</div>
+        <div class="swiper mySwiper" id="gallery-vibe">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="images/gallery1.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                        <img src="images/gallery1.jpg" alt="갤러리 사진 1" />
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="images/gallery2.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                        <img src="images/gallery2.jpg" alt="갤러리 사진 2" />
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="images/gallery3.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                        <img src="images/gallery3.jpg" alt="갤러리 사진 3" />
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="images/gallery4.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                        <img src="images/gallery4.jpg" alt="갤러리 사진 4" />
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="images/gallery5.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                        <img src="images/gallery5.jpg" alt="갤러리 사진 5" />
+                    </a>
+                </div>                                
+                <div class="swiper-slide">
+                    <a href="images/gallery5.jpg" data-pswp-width="1200" data-pswp-height="1800" target="_blank">
+                        <img src="images/gallery5.jpg" alt="갤러리 사진 5" />
+                    </a>
+                </div>                
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <p style="font-size: 0.75rem; color: #999; margin-top: 10px;">사진을 클릭하면 크게 볼 수 있습니다.</p>
     </section>
 
     <section class="section date-info">
@@ -76,16 +169,55 @@
 
     <section class="section" style="background: #fafafa; border-top: 1px solid #eee;">
         <div class="section-title">ACCOUNT</div>
-        <p style="font-size: 0.9rem; margin-bottom: 30px;">축복의 마음을 담아주시는 분들께</p>
+        <p style="font-size: 0.85rem; color: #888; margin-bottom: 30px;">축복의 마음을 담아주시는 분들께<br>따뜻한 마음에 깊이 감사드립니다.</p>
         
-        <div class="account-box">
-            신랑측 구양하 <br>
-            (추후 업데이트 예정)
-        </div>
-        <div class="account-box">
-            신부측 안수경 <br>
-            (추후 업데이트 예정)
-        </div>
+        <details class="account-details" open>
+            <summary class="account-summary">신랑측에게</summary>
+            <div class="account-list">
+                <div class="account-item">
+                    <div class="account-info">
+                        <em>신랑</em> <strong>구양하</strong>
+                        <div class="account-number">토스뱅크 1000-01-234567</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('100001234567')">
+                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    </button>
+                </div>
+                <div class="account-item">
+                    <div class="account-info">
+                        <em>신랑 부</em> <strong>구덕모</strong>
+                        <div class="account-number">국민은행 000-00-0000-000</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('000000000000')">
+                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </details>
+
+        <details class="account-details">
+            <summary class="account-summary">신부측에게</summary>
+            <div class="account-list">
+                <div class="account-item">
+                    <div class="account-info">
+                        <em>신부</em> <strong>안수경</strong>
+                        <div class="account-number">카카오뱅크 3333-01-2345678</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('3333012345678')">
+                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    </button>
+                </div>
+                <div class="account-item">
+                    <div class="account-info">
+                        <em>신부 부</em> <strong>안창국</strong>
+                        <div class="account-number">우리은행 1002-000-000000</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('100200000000')">
+                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </details>
     </section>
 
     <footer>
@@ -94,8 +226,31 @@
     </footer>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script type="module">
+    import PhotoSwipeLightbox from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe-lightbox.esm.min.js';
+    
+    // 1. Swiper 초기화
+    const swiper = new Swiper(".mySwiper", {
+        loop: true,
+        spaceBetween: 10,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
+
+    // 2. PhotoSwipe (라이트박스) 초기화
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '#gallery-vibe',
+        children: 'a',
+        pswpModule: () => import('https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.2/photoswipe.esm.min.js')
+    });
+    lightbox.init();
+</script>
+
 <script>
-    // D-Day 계산 (2026-05-09 13:00)
+    // D-Day 계산
     const weddingDate = new Date("2026-05-09T13:00:00").getTime();
     function updateDday() {
         const now = new Date().getTime();
@@ -105,6 +260,15 @@
         document.getElementById("dday-display").innerHTML = ddayText;
     }
     updateDday();
+
+    // 계좌번호 복사 함수
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            alert("계좌번호가 복사되었습니다.");
+        }, function(err) {
+            console.error('복사 실패:', err);
+        });
+    }
 </script>
 
 </body>
