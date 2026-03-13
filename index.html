@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구양하 & 안수경 결혼합니다</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400&family=Gowun+Batang&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #ffffff; --text-main: #333333; --text-sub: #777777; --accent: #8e9775; }
+        body { margin: 0; padding: 0; font-family: 'Noto Serif KR', serif; background-color: #f9f9f9; color: var(--text-main); line-height: 1.8; }
+        .container { max-width: 450px; margin: 0 auto; background: var(--bg-color); box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+        
+        .main-visual { position: relative; text-align: center; padding: 60px 20px; }
+        .main-visual img { width: 100%; border-radius: 2px; margin-top: 20px; }
+        .main-title { margin-top: 30px; font-size: 1.3rem; letter-spacing: 4px; font-weight: 400; }
+        
+        .section { padding: 60px 30px; text-align: center; }
+        .section-title { font-size: 0.9rem; color: var(--accent); letter-spacing: 3px; margin-bottom: 30px; }
+        .invitation-text { font-family: 'Gowun Batang', serif; font-size: 1.05rem; color: var(--text-main); word-break: keep-all; line-height: 2.2; }
+        
+        .date-info { background: #fdfdfd; padding: 40px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+        .d-day { font-weight: bold; color: var(--accent); font-size: 1.1rem; margin-bottom: 10px; }
+
+        .map-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .btn { padding: 12px 20px; border: 1px solid #ddd; background: white; cursor: pointer; text-decoration: none; color: #555; font-size: 0.85rem; border-radius: 5px; }
+        
+        .account-box { background: #f8f8f8; padding: 20px; border-radius: 8px; margin-top: 15px; text-align: left; font-size: 0.85rem; border: 1px solid #eee; }
+        
+        footer { padding: 60px 40px; font-size: 0.75rem; color: #aaa; text-align: center; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <section class="main-visual">
+        <div class="main-title">구 양 하 &nbsp; | &nbsp; 안 수 경</div>
+        <p style="font-size: 0.85rem; color: var(--text-sub); margin-top: 15px;">2026. 05. 09. SAT PM 1:00</p>
+        <img src="main.jpg" alt="메인 사진">
+    </section>
+
+    <section class="section">
+        <div class="section-title">INVITATION</div>
+        <div class="invitation-text">
+            여덟 번의 봄을 함께 보내는 동안<br>
+            우리는 서로의 계절이 되었습니다.<br><br>
+            이제 앞으로의 시간 또한<br>
+            같은 자리에서, 같은 마음으로<br>
+            나란히 걸어가려 합니다.<br><br>
+            저희의 시작에<br>
+            따뜻한 축복으로 함께해 주시길 바랍니다.
+        </div>
+        
+        <div style="margin-top: 50px; font-size: 1.05rem; letter-spacing: 1px;">
+            구덕모 · 박미경 <span style="font-size: 0.85rem; color: #999;">의 아들</span> <b>양하</b><br>
+            안창국 · 심혜정 <span style="font-size: 0.85rem; color: #999;">의 딸</span> <b>수경</b>
+        </div>
+    </section>
+
+    <section class="section date-info">
+        <div id="dday-display" class="d-day">D-Day</div>
+        <div style="margin-top: 10px; font-weight: 400;">2026년 5월 9일 토요일 오후 1시</div>
+        <div style="color: var(--text-sub); font-size: 0.95rem;">NAVER 1784 28F SKY HALL</div>
+    </section>
+
+    <section class="section">
+        <div class="section-title">LOCATION</div>
+        <div class="content" style="margin-bottom: 25px;">
+            <b>네이버 1784 28층 SKY HALL</b><br>
+            <span style="font-size: 0.9rem; color: var(--text-sub);">경기도 성남시 분당구 정자일로 95</span>
+        </div>
+        <div class="map-buttons">
+            <a href="https://map.kakao.com/link/to/네이버1784,37.3582,127.1047" class="btn" target="_blank">카카오맵</a>
+            <a href="https://naver.me/FfMW3pNW" class="btn" target="_blank">네이버지도</a>
+        </div>
+    </section>
+
+    <section class="section" style="background: #fafafa; border-top: 1px solid #eee;">
+        <div class="section-title">ACCOUNT</div>
+        <p style="font-size: 0.9rem; margin-bottom: 30px;">축복의 마음을 담아주시는 분들께</p>
+        
+        <div class="account-box">
+            신랑측 구양하 <br>
+            (추후 업데이트 예정)
+        </div>
+        <div class="account-box">
+            신부측 안수경 <br>
+            (추후 업데이트 예정)
+        </div>
+    </section>
+
+    <footer>
+        © 2026 YANGHA & SUKYUNG.<br>
+        THANK YOU
+    </footer>
+</div>
+
+<script>
+    // D-Day 계산 (2026-05-09 13:00)
+    const weddingDate = new Date("2026-05-09T13:00:00").getTime();
+    function updateDday() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+        const days = Math.ceil(distance / (1000 * 60 * 60 * 24));
+        const ddayText = days > 0 ? `결혼식이 ${days}일 남았습니다` : (days === 0 ? "오늘이 결혼식입니다!" : "행복하게 잘 살고 있습니다");
+        document.getElementById("dday-display").innerHTML = ddayText;
+    }
+    updateDday();
+</script>
+
+</body>
+</html>
